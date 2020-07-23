@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    img{
+        display:block;
+    }
+    body,html{
+        height:100%;
+    }
+    section{
+        width:100%;
+        height:100%;
+    }
+    #imgShow{
+        width:100%;
+        height:100%;
+    }
+    .cymbal{
+        width:60px;
+        height:60px;
+        position:absolute;
+        left:1%;
+        bottom:30%;
+    }
+    .drink{
+        width:60px;
+        height:60px;
+        position:absolute;
+        left:1%;
+        bottom:20%;
+    }
+    .eat{
+        width:60px;
+        height:60px;
+        position:absolute;
+        left:1%;
+        bottom:10%;
+    }
+    .fart{
+        width:60px;
+        height:60px;
+        position:absolute;
+        right:1%;
+        bottom:30%;
+    }
+    .pie{
+        width:60px;
+        height:60px;
+        position:absolute;
+        right:1%;
+        bottom:20%;
+    }
+    .scratch{
+        width:60px;
+        height:60px;
+        position:absolute;
+        right:1%;
+        bottom:10%;
+    }
+    .angry{
+        width:108px;
+        height:92px;
+       /*  background:chartreuse; */
+        position: absolute;
+        left:35%;
+        bottom:31%;
+    }
+    .angry1{
+        width:38px;
+        height:63px;
+       /*  background:chartreuse; */
+        position: absolute;
+        right:22%;
+        bottom:11%;
+    }
+    .footLeft{
+        width:42px;
+        height:35px;
+       /*  background:red; */
+        position:absolute;
+        left:36%;
+        bottom:4%;
+    }
+    .footRight{
+        width:42px;
+        height:35px;
+        /* background:blue; */
+        position:absolute;
+        right:36%;
+        bottom:4%;
+    }
+    .knockout{
+        width:110px;
+        height:46px;
+       /*  background:blue; */
+        position:absolute;
+        right:36%;
+        bottom:76%;
+    }
+    .stomach{
+        width:110px;
+        height:88px;
+        /* background:yellow; */
+        position:absolute;
+        right:36%;
+        bottom:15%;
+    }
+
+    </style>
+</head>
+<body>
+    <section>
+        <img id="imgShow" src="./tom/img/Animations/angry/angry_00.jpg" alt="">
+    </section>
+    <div class="cymbal">
+        <img src="./tom/img/Buttons/cymbal/cymbal.png" alt="">
+    </div>
+    <div class="drink">
+        <img src="./tom/img/Buttons/drink/drink.png" alt="">
+    </div>
+    <div class="eat">
+        <img src="./tom/img/Buttons/eat/eat.png" alt="">
+    </div>
+    <div class="fart">
+        <img src="./tom/img/Buttons/fart/fart.png" alt="">
+    </div>
+    <div class="pie">
+        <img src="./tom/img/Buttons/pie/pie.png" alt="">
+    </div>
+    <div class="scratch">
+        <img src="./tom/img/Buttons/scratch/scratch.png" alt="">
+    </div>
+    <div class="angry"></div>
+    <div class="angry1"></div>
+    <div class="footLeft"></div>
+    <div class="footRight"></div>
+    <div class="knockout"></div>
+    <div class='stomach'></div>
+    <div></div>
+
+    <audio src="" id="music"></audio>
+
+    <script>
+    function Tom(){
+        this.imgShow = document.getElementById('imgShow');
+        this.btn = document.querySelectorAll('div');
+        this.music = document.getElementById('music');
+        this.init();
+    }
+    Tom.prototype = {
+        init : function(){
+            this.eventBind();
+        },
+        tomPlay : function(name,num){
+            var _this = this;
+            this.count = 0 ;
+            clearInterval(this.timer);
+            this.timer = setInterval(function(){
+                if(_this.count >= num){
+                    clearInterval(_this.timer);
+                    _this.count = 0 ;
+                }else{
+                    _this.count++;
+                    _this.imgShow.src = './tom/img/Animations/'+name+'/'+name+'_' + _this.mendZero(_this.count)+'.jpg';
+
+                }
+            },80)
+        },
+
+        mendZero : function(num){
+             if(num < 10){
+                 return '0' + num;
+             }else{
+                 return num;
+             }
+        },
+
+        eventBind : function(){
+            var _this = this;
+            for(let i = 0 , k = this.btn.length ; i < k ; i++){
+                this.btn[i].onclick = function(){
+                    let classN = this.className;
+                    switch(classN){
+                        case 'cymbal' :
+                            _this.tomPlay('cymbal',12);
+                            _this.music.src = './tom/mp3/pia.mp3';
+                            _this.music.play();
+                            break;
+                        case 'drink' :
+                            _this.tomPlay('drink',80);
+                            break;
+                        case 'eat' :
+                            _this.tomPlay('eat',39);
+                            break;
+                        case 'fart' :
+                            _this.tomPlay('fart',27);
+                            break;
+                        case 'pie' :
+                            _this.tomPlay('pie',23);
+                            break;
+                        case 'scratch' :
+                            _this.tomPlay('scratch',55);
+                            break;
+                        case 'angry' :
+                            _this.tomPlay('angry',25);
+                            break;
+                        case 'angry1' :
+                            _this.tomPlay('angry',25);
+                            break;
+                        case 'footLeft' :
+                            _this.tomPlay('footRight',29);
+                            _this.music.src = './tom/mp3/tomaiyou.mp3';
+                            _this.music.play();
+                            break;
+                        case 'footRight' :
+                            _this.tomPlay('footLeft',29);
+                            _this.music.src = './tom/mp3/tomaiyou.mp3';
+                            _this.music.play();
+                            break;
+                        case 'knockout' :
+                            _this.tomPlay('knockout',80);
+                            break;
+                        case 'stomach' :
+                            _this.tomPlay('stomach',33);
+                            _this.music.src = './tom/mp3/tomaiyou.mp3';
+                            _this.music.play();
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    new Tom();
+    </script>
+</body>
+</html>
